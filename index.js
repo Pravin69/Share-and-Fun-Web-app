@@ -16,8 +16,16 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "views/build")));
 
+// Allow requests from a specific origin
+const corsOptions = {
+  origin: "https://share-and-fun-web-app.vercel.app",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // enable set cookie with credentials (in case of sessions)
+  optionsSuccessStatus: 204,
+};
+
 app.use(helmet());
-app.use(cors());
+app.use(cors(corsOptions));
 // converts request body to JSON.
 app.use(express.json({ limit: "10mb" }));
 // converts form data to json
