@@ -4,6 +4,9 @@ import { compareString, createJWT, hashString } from "../utils/index.js";
 import PasswordReset from "./../models/PasswordReset.js";
 import { resetPasswordLink } from "../utils/sendEmail.js";
 import FriendRequest from "./../models/friendRequest.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const verifyEmail = async (req, res) => {
   const { userId, token } = req.params;
@@ -128,7 +131,7 @@ export const changePassword = async (req, res, next) => {
     if (user) {
       await PasswordReset.findOneAndDelete({ userId });
       const message = "Password successfully reset 😁";
-      const url = `${req.protocol}://${req.get("host")}/users/reset-password-form?status=success&message=${message}`;
+      const url = `${process.env.APP_URL}/users/reset-password-form?status=success&message=${message}`;
       res.redirect(200, url);
 
       // res.status(200).json({

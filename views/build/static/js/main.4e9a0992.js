@@ -8323,7 +8323,7 @@
                           return (
                             (e.prev = 8),
                             (e.next = 11),
-                            fetch("http://localhost:8800/users/reset-password", {
+                            fetch("https://share-and-fun-web-app-backend.vercel.app/users/reset-password", {
                               method: "POST",
                               headers: { "Content-Type": "application/json" },
                               body: JSON.stringify({ userId: s, password: n }),
