@@ -11,11 +11,6 @@ import router from "./routes/index.js";
 
 dotenv.config();
 const __dirname = path.resolve(path.dirname(""));
-
-const app = express();
-
-app.use(express.static(path.join(__dirname, "views/build")));
-
 // Allow requests from a specific origin
 const corsOptions = {
   origin: "https://share-and-fun-web-app.vercel.app",
@@ -24,8 +19,12 @@ const corsOptions = {
   optionsSuccessStatus: 204,
 };
 
-app.use(helmet());
+const app = express();
 app.use(cors(corsOptions));
+
+app.use(express.static(path.join(__dirname, "views/build")));
+
+app.use(helmet());
 // converts request body to JSON.
 app.use(express.json({ limit: "10mb" }));
 // converts form data to json
